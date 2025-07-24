@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirdropHub - Kripto Airdrop Bilgileri</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#1E40AF',
+                        accent: '#F59E0B'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-primary">
+                        <i class="fas fa-rocket mr-2"></i>AirdropHub
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#airdrops" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Airdroplar</a>
+                        <a href="#links" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Linkler</a>
+                        <a href="#help" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Yardım</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-primary focus:outline-none focus:text-primary">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white absolute w-full top-16 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#airdrops" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Airdroplar</a>
+                <a href="#links" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Linkler</a>
+                <a href="#help" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Yardım</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-16 bg-gradient-to-br from-primary to-secondary text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="hero-content">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 hero-title">
+                    Kripto Dünyasının En İyi
+                    <span class="text-accent hero-highlight">Airdrop</span> Fırsatları
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 hero-subtitle">
+                    En güncel ve güvenilir airdrop bilgileri tek yerde
+                </p>
+                <button class="bg-accent hover:bg-yellow-600 text-white font-bold py-4 px-8 rounded-full text-lg transition-all transform hover:scale-105 shadow-lg">
+                    <i class="fas fa-rocket mr-2"></i>Airdropları Keşfet
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destekçiler Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Destekçilerimiz</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6" id="supporters-grid">
+                <!-- Destekçi kartları JavaScript ile yüklenecek -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Airdroplar Section -->
+    <section id="airdrops" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Airdroplar!</h2>
+            <p class="text-center text-gray-600 mb-12">En güncel airdrop fırsatlarını kaçırmayın</p>
+            
+            <!-- Filtreler -->
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button class="filter-btn active bg-primary text-white px-4 py-2 rounded-full text-sm font-medium" data-filter="all">Tümü</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium" data-filter="active">Aktif</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium" data-filter="upcoming">Yakında</button>
+                <button class="filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium" data-filter="ended">Sona Eren</button>
+            </div>
+            
+            <!-- Airdrop Kartları -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="airdrops-grid">
+                <!-- Airdrop kartları JavaScript ile yüklenecek -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Logo ve Açıklama -->
+                <div class="col-span-1 md:col-span-2">
+                    <h3 class="text-2xl font-bold mb-4">
+                        <i class="fas fa-rocket mr-2"></i>AirdropHub
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        Kripto dünyasının en güncel ve güvenilir airdrop bilgilerini paylaşan platform. 
+                        En iyi fırsatları kaçırmayın!
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-discord text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Hızlı Linkler -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Hızlı Linkler</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#airdrops" class="text-gray-300 hover:text-white transition-colors">Airdroplar</a></li>
+                        <li><a href="#links" class="text-gray-300 hover:text-white transition-colors">Linkler</a></li>
+                        <li><a href="#help" class="text-gray-300 hover:text-white transition-colors">Yardım</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Hakkımızda</a></li>
+                    </ul>
+                </div>
+                
+                <!-- İletişim -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">İletişim</h4>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300">
+                            <i class="fas fa-envelope mr-2"></i>info@airdropHub.com
+                        </li>
+                        <li class="text-gray-300">
+                            <i class="fas fa-globe mr-2"></i>www.airdropHub.com
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300">
+                    © 2024 AirdropHub. Tüm hakları saklıdır.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/cms-integration.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 

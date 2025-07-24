@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airdrop Detayı - AirdropHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#1E40AF',
+                        accent: '#F59E0B'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-primary">
+                        <i class="fas fa-rocket mr-2"></i>AirdropHub
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html#airdrops" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Airdroplar</a>
+                        <a href="index.html#links" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Linkler</a>
+                        <a href="index.html#help" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Yardım</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-primary focus:outline-none focus:text-primary">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white absolute w-full top-16 shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html#airdrops" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Airdroplar</a>
+                <a href="index.html#links" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Linkler</a>
+                <a href="index.html#help" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium">Yardım</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="fixed inset-0 bg-white bg-opacity-90 flex items-center justify-center z-50">
+        <div class="text-center">
+            <div class="loading mb-4"></div>
+            <p class="text-gray-600">Airdrop bilgileri yükleniyor...</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        <!-- Breadcrumb -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <a href="index.html" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary">
+                            <i class="fas fa-home mr-2"></i>
+                            Ana Sayfa
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+                            <span class="text-sm font-medium text-gray-500" id="breadcrumb-title">Airdrop Detayı</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+
+        <!-- Airdrop Detail Content -->
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+            <div id="airdrop-detail" class="hidden">
+                <!-- Header -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                    <div class="relative">
+                        <img id="airdrop-image" src="" alt="" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4">
+                            <span id="status-badge" class="px-4 py-2 rounded-full text-sm font-medium"></span>
+                        </div>
+                        <div class="absolute bottom-4 left-4">
+                            <h1 id="airdrop-title" class="text-3xl font-bold text-white drop-shadow-lg"></h1>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Main Content -->
+                    <div class="lg:col-span-2 space-y-8">
+                        <!-- Description -->
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                                <i class="fas fa-info-circle text-primary mr-2"></i>Açıklama
+                            </h2>
+                            <p id="airdrop-description" class="text-gray-600 leading-relaxed"></p>
+                        </div>
+
+                        <!-- Requirements -->
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                                <i class="fas fa-list-check text-primary mr-2"></i>Gereksinimler
+                            </h2>
+                            <ul id="requirements-list" class="space-y-3">
+                                <!-- Requirements will be loaded here -->
+                            </ul>
+                        </div>
+
+                        <!-- How to Participate -->
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                                <i class="fas fa-play-circle text-primary mr-2"></i>Nasıl Katılınır?
+                            </h2>
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-3">
+                                    <div class="flex-shrink-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Cüzdanınızı Hazırlayın</h3>
+                                        <p class="text-gray-600 text-sm mt-1">Gerekli blockchain cüzdanınızı kurun ve güvenli hale getirin.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="flex-shrink-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Gereksinimleri Tamamlayın</h3>
+                                        <p class="text-gray-600 text-sm mt-1">Yukarıda listelenen tüm gereksinimleri eksiksiz olarak tamamlayın.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="flex-shrink-0 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Başvurunuzu Yapın</h3>
+                                        <p class="text-gray-600 text-sm mt-1">Resmi airdrop sayfasından başvurunuzu tamamlayın.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="space-y-6">
+                        <!-- Quick Info -->
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Hızlı Bilgiler</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-600">Durum:</span>
+                                    <span id="status-text" class="font-semibold"></span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-600">Ödül:</span>
+                                    <span id="reward-text" class="font-semibold text-accent"></span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-600">Bitiş Tarihi:</span>
+                                    <span id="end-date-text" class="font-semibold"></span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-600">Kalan Süre:</span>
+                                    <span id="countdown" class="font-semibold text-red-600"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Hızlı Erişim</h3>
+                            <div class="space-y-3">
+                                <a id="official-link" href="#" target="_blank" class="w-full bg-primary hover:bg-secondary text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    Resmi Sayfaya Git
+                                </a>
+                                <button id="share-btn" class="w-full bg-accent hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center">
+                                    <i class="fas fa-share mr-2"></i>
+                                    Paylaş
+                                </button>
+                                <button id="bookmark-btn" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center">
+                                    <i class="fas fa-bookmark mr-2"></i>
+                                    Kaydet
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Related Airdrops -->
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Benzer Airdroplar</h3>
+                            <div id="related-airdrops" class="space-y-3">
+                                <!-- Related airdrops will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div id="error-state" class="hidden text-center py-16">
+                <i class="fas fa-exclamation-triangle text-6xl text-red-500 mb-4"></i>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Airdrop Bulunamadı</h2>
+                <p class="text-gray-600 mb-6">Aradığınız airdrop mevcut değil veya kaldırılmış olabilir.</p>
+                <a href="index.html" class="bg-primary hover:bg-secondary text-white font-bold py-3 px-6 rounded-lg transition-colors">
+                    Ana Sayfaya Dön
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Logo ve Açıklama -->
+                <div class="col-span-1 md:col-span-2">
+                    <h3 class="text-2xl font-bold mb-4">
+                        <i class="fas fa-rocket mr-2"></i>AirdropHub
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        Kripto dünyasının en güncel ve güvenilir airdrop bilgilerini paylaşan platform.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-discord text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Hızlı Linkler -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Hızlı Linkler</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#airdrops" class="text-gray-300 hover:text-white transition-colors">Airdroplar</a></li>
+                        <li><a href="index.html#links" class="text-gray-300 hover:text-white transition-colors">Linkler</a></li>
+                        <li><a href="index.html#help" class="text-gray-300 hover:text-white transition-colors">Yardım</a></li>
+                    </ul>
+                </div>
+                
+                <!-- İletişim -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">İletişim</h4>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300">
+                            <i class="fas fa-envelope mr-2"></i>info@airdropHub.com
+                        </li>
+                        <li class="text-gray-300">
+                            <i class="fas fa-globe mr-2"></i>www.airdropHub.com
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300">
+                    © 2024 AirdropHub. Tüm hakları saklıdır.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/cms-integration.js"></script>
+    <script src="js/detail.js"></script>
+</body>
+</html> 
